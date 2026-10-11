@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proxy preventivo</title>
+<style>
+  :root {
+    --bg: #f6f7f9; --panel: #ffffff; --text: #1d2330; --muted: #5d6677; --line: #dde1e8;
+    --accent: #2f5bd3; --accent-text: #ffffff;
+    --ok-bg: #e5f4ea; --ok: #1f7a3d; --warn-bg: #fdeceb; --warn: #b3261e;
+    --tag-bg: #fff1c2; --tag: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14171d; --panel: #1d2129; --text: #e7eaf0; --muted: #a0a8b8; --line: #323844;
+      --accent: #7c9cff; --accent-text: #0e1220;
+      --ok-bg: #173323; --ok: #7fd69b; --warn-bg: #3a1a19; --warn: #ff9c94;
+      --tag-bg: #4a3b0c; --tag: #ffe08a;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.5rem; margin: 0 0 4px; }
+  .sub { color: var(--muted); margin: 0 0 20px; }
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px; }
+  textarea { width: 100%; min-height: 140px; resize: vertical; padding: 12px; border-radius: 8px;
+             border: 1px solid var(--line); background: var(--bg); color: var(--text); font: inherit; }
+  .fila { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 12px; }
+  button { font: inherit; border-radius: 8px; padding: 8px 14px; cursor: pointer;
+           border: 1px solid var(--line); background: var(--panel); color: var(--text); }
+  button.primario { background: var(--accent); color: var(--accent-text); border-color: var(--accent); font-weight: 600; }
+  button:disabled { opacity: .6; cursor: wait; }
+  label.opcion { display: flex; gap: 6px; align-items: center; color: var(--muted); margin-left: auto; }
+  .ejemplos { color: var(--muted); font-size: .9rem; }
+  #resultado { margin-top: 20px; display: none; }
+  .decision { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 16px; }
+  .badge { font-weight: 700; padding: 6px 12px; border-radius: 999px; letter-spacing: .02em; }
+  .badge.ENVIAR { background: var(--ok-bg); color: var(--ok); }
+  .badge.ENMASCARAR { background: var(--warn-bg); color: var(--warn); }
+  .meta { color: var(--muted); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+  .chip { background: var(--tag-bg); color: var(--tag); border-radius: 6px; padding: 2px 8px; font-size: .9rem; font-weight: 600; }
+  .columnas { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 760px) { .columnas { grid-template-columns: 1fr; } label.opcion { margin-left: 0; } }
+  h2 { font-size: 1rem; margin: 0 0 8px; color: var(--muted); font-weight: 600; }
+  .texto { white-space: pre-wrap; word-break: break-word; background: var(--bg); border: 1px solid var(--line);
+           border-radius: 8px; padding: 12px; min-height: 80px; }
+  .marca { background: var(--tag-bg); color: var(--tag); border-radius: 4px; padding: 0 3px; font-weight: 600; }
+  #respuesta-bloque { margin-top: 16px; display: none; }
+  .error { color: var(--warn); margin-top: 12px; }
+  .nota { color: var(--muted); font-size: .85rem; margin-top: 20px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Proxy preventivo de información sensible</h1>
+  <p class="sub">Escribe un prompt como lo enviarías a una IA generativa. El proxy detecta la información sensible, decide si hay que enmascararla y muestra lo que realmente se enviaría.</p>
+
+  <div class="panel">
+    <textarea id="prompt" placeholder="Escribe aquí tu prompt..."></textarea>
+    <div class="fila ejemplos">
+      Ejemplos:
+      <button type="button" data-ej="0">Correo con datos personales</button>
+      <button type="button" data-ej="1">Credencial en código</button>
+      <button type="button" data-ej="2">Pregunta sin datos</button>
+    </div>
+    <div class="fila">
+      <button type="button" class="primario" id="analizar">Analizar</button>
+      <label class="opcion"><input type="checkbox" id="enviar"> Enviar también a la IA</label>
+    </div>
+    <div class="error" id="error"></div>
+  </div>
+
+  <div id="resultado" class="panel">
+    <div class="decision">
+      <span class="badge" id="badge"></span>
+      <span class="meta" id="motivo"></span>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div class="columnas">
+      <div><h2>Prompt original (no sale de tu equipo)</h2><div class="texto" id="original"></div></div>
+      <div><h2>Texto que se envía a la IA</h2><div class="texto" id="enviado"></div></div>
+    </div>
+    <div id="respuesta-bloque">
+      <h2 style="margin-top:16px">Respuesta de la IA</h2>
+      <div class="texto" id="respuesta"></div>
+    </div>
+  </div>
+
+  <p class="nota">El proxy no guarda nada: ni los prompts, ni las entidades, ni las respuestas. Al cliente solo se le informa el tipo de cada entidad detectada, no su valor. Los ejemplos usan datos ficticios.</p>
+</main>
+<script>
+  const EJEMPLOS = [
+    "Redacta un correo para Ana María Gómez Restrepo, CC 1.036.456.789, recordándole su cita del 15 de marzo de 2026 en la Calle 45 # 23-10, Medellín. Si tiene dudas puede escribir a ana.gomez@correo.com o llamar al +57 301 456 7890.",
+    "Mi script falla al conectarse. Este es el .env:\nOPENAI_API_KEY=sk-proj-9fK2xQ7LmN4pR8tV1wZ6bC3dE5gH0jYu\nDATABASE_URL=postgres://admin:Cl4ve-Segura-2026@10.0.4.17:5432/ventas\n¿Qué está mal?",
+    "Explícame la diferencia entre un contrato a término fijo y uno indefinido en Colombia."
+  ];
+  const $ = id => document.getElementById(id);
+  document.querySelectorAll("[data-ej]").forEach(b =>
+    b.addEventListener("click", () => { $("prompt").value = EJEMPLOS[+b.dataset.ej]; $("prompt").focus(); }));
+
+  function escapar(s) {
+    return s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  }
+  function resaltar(s) {
+    return escapar(s).replace(/\[(PER|EMAIL|PHONE|ADDRESS|ID_DOC|FIN_ID|CREDENTIAL|DATE|LOC|ORG|NET_DIGITAL|URL|DOC_REF)\]/g,
+      '<span class="marca">[$1]</span>');
+  }
+
+  $("analizar").addEventListener("click", async () => {
+    const prompt = $("prompt").value.trim();
+    $("error").textContent = "";
+    if (!prompt) { $("error").textContent = "Escribe un prompt primero."; return; }
+    const boton = $("analizar");
+    boton.disabled = true; boton.textContent = "Analizando...";
+    try {
+      const r = await fetch("v1/prompt", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt, enviar: $("enviar").checked })
+      });
+      if (!r.ok) throw new Error("El proxy respondió " + r.status);
+      const d = await r.json();
+      const accion = d.decision.accion;
+      $("badge").textContent = accion === "ENMASCARAR" ? "ENMASCARAR" : "ENVIAR SIN CAMBIOS";
+      $("badge").className = "badge " + accion;
+      $("motivo").textContent = "Riesgo " + d.decision.riesgo.toFixed(2).replace(".", ",") + " (umbral 0,60) · " + d.decision.motivo;
+      const conteo = {};
+      d.entidades.forEach(e => conteo[e] = (conteo[e] || 0) + 1);
+      $("chips").innerHTML = Object.keys(conteo).length
+        ? Object.entries(conteo).map(([e, n]) => `<span class="chip">${e}${n > 1 ? " × " + n : ""}</span>`).join("")
+        : '<span class="meta">No se detectaron entidades.</span>';
+      $("original").textContent = prompt;
+      $("enviado").innerHTML = resaltar(d.texto_enviado);
+      const conRespuesta = "respuesta" in d || "error_ia" in d;
+      $("respuesta-bloque").style.display = conRespuesta ? "block" : "none";
+      if (conRespuesta) $("respuesta").textContent = d.respuesta ?? ("No se pudo llamar a la IA: " + d.error_ia);
+      $("resultado").style.display = "block";
+    } catch (e) {
+      $("error").textContent = "No se pudo contactar el proxy. ¿Está corriendo? (" + e.message + ")";
+    } finally {
+      boton.disabled = false; boton.textContent = "Analizar";
+    }
+  });
+</script>
+</body>
+</html>
