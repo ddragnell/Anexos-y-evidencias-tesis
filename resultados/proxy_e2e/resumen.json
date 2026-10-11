@@ -1,0 +1,74 @@
+{
+ "hardware": {
+  "python": "3.13.15",
+  "sistema": "Linux-6.6.122+-x86_64-with-glibc2.39",
+  "cpu": "Intel(R) Xeon(R) CPU @ 2.00GHz",
+  "nucleos": 2,
+  "torch": "2.11.0+cu130",
+  "gpu": "Tesla T4",
+  "dispositivo_ner": "cuda:0"
+ },
+ "ner": {
+  "backend": "hf",
+  "modelo": "/content/drive/MyDrive/modelos-ner/ner-bert-final"
+ },
+ "carga_modelo_s": 30.89,
+ "conjuntos": {
+  "sintetico_test_final": {
+   "prompts": 120,
+   "enmascarados": 70,
+   "coincidencias": {
+    "upstream": 120,
+    "respuesta": 120,
+    "decision": 120,
+    "analisis_texto": 120,
+    "analisis_decision": 120
+   },
+   "latencia_ms": {
+    "enviar": {
+     "mediana": 16.4,
+     "p95": 22.0,
+     "max": 77.0
+    },
+    "analisis": {
+     "mediana": 16.5,
+     "p95": 22.5,
+     "max": 36.2
+    }
+   }
+  },
+  "doccano_prueba_final": {
+   "prompts": 45,
+   "enmascarados": 13,
+   "coincidencias": {
+    "upstream": 45,
+    "respuesta": 45,
+    "decision": 45,
+    "analisis_texto": 45,
+    "analisis_decision": 45
+   },
+   "latencia_ms": {
+    "enviar": {
+     "mediana": 14.0,
+     "p95": 57.2,
+     "max": 65.4
+    },
+    "analisis": {
+     "mediana": 13.8,
+     "p95": 55.9,
+     "max": 64.9
+    }
+   }
+  }
+ },
+ "latencia_ms_total": {
+  "enviar": {
+   "mediana": 15.9,
+   "p95": 28.4
+  },
+  "analisis": {
+   "mediana": 16.1,
+   "p95": 26.4
+  }
+ }
+}

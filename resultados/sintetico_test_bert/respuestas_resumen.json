@@ -1,0 +1,46 @@
+{
+ "chat-latest": {
+  "n": 60,
+  "fecha_ejecucion_utc": "2026-10-10T17:21:01+00:00",
+  "versiones_api": [
+   "chat-latest"
+  ],
+  "temperatura": "predeterminada (no admite el parámetro)",
+  "embeddings": "sentence-transformers/paraphrase-multilingual-mpnet-base-v2",
+  "sim_original_vs_enmascarado": {
+   "media": 0.7087342863281568,
+   "mediana": 0.743679016828537,
+   "desv": 0.14057632066003917,
+   "min": 0.4501100778579712
+  },
+  "sim_original_vs_original": {
+   "media": 0.9628556102514267,
+   "mediana": 0.9749101400375366,
+   "desv": 0.04189709145973244,
+   "min": 0.7919256687164307
+  },
+  "respuestas_con_marcadores": 59
+ },
+ "gpt-5-mini": {
+  "n": 60,
+  "fecha_ejecucion_utc": "2026-10-10T17:44:26+00:00",
+  "versiones_api": [
+   "gpt-5-mini-2025-08-07"
+  ],
+  "temperatura": "predeterminada (no admite el parámetro)",
+  "embeddings": "sentence-transformers/paraphrase-multilingual-mpnet-base-v2",
+  "sim_original_vs_enmascarado": {
+   "media": 0.7055591101447741,
+   "mediana": 0.7117768228054047,
+   "desv": 0.12114982120368267,
+   "min": 0.4133097231388092
+  },
+  "sim_original_vs_original": {
+   "media": 0.8505871891975403,
+   "mediana": 0.861213743686676,
+   "desv": 0.11158322978919628,
+   "min": 0.5780348181724548
+  },
+  "respuestas_con_marcadores": 59
+ }
+}

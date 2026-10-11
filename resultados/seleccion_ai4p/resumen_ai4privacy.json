@@ -1,0 +1,45 @@
+{
+ "dataset": "ai4privacy/open-pii-masking-500k-ai4privacy",
+ "idioma": "es",
+ "filas_idioma": 62586,
+ "locales": {
+  "null": 62586
+ },
+ "entrenamiento": 20000,
+ "validacion": 2000,
+ "semilla": 13,
+ "etiquetas_origen": {
+  "GIVENNAME": 42605,
+  "SURNAME": 15555,
+  "CITY": 12261,
+  "TELEPHONENUM": 9294,
+  "EMAIL": 7092,
+  "DATE": 6535,
+  "STREET": 6423,
+  "TIME": 6323,
+  "BUILDINGNUM": 5488,
+  "IDCARDNUM": 5332,
+  "TITLE": 3766,
+  "AGE": 3486,
+  "PASSPORTNUM": 2325,
+  "ZIPCODE": 1967,
+  "TAXNUM": 1497,
+  "CREDITCARDNUMBER": 1446,
+  "GENDER": 1341,
+  "SEX": 1328,
+  "SOCIALNUM": 1195,
+  "DRIVERLICENSENUM": 1160
+ },
+ "etiquetas_usadas": {
+  "GIVENNAME": "PER",
+  "SURNAME": "PER",
+  "BUILDINGNUM": "ADDRESS",
+  "STREET": "ADDRESS",
+  "CITY": "LOC"
+ },
+ "menciones_taxonomia": {
+  "PER": 14855,
+  "LOC": 3867,
+  "ADDRESS": 2473
+ }
+}

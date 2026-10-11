@@ -1,0 +1,21 @@
+{
+ "dataset": "unimelb-nlp/wikiann",
+ "config": "es",
+ "semilla": 13,
+ "entrenamiento": {
+  "textos": 20000,
+  "menciones": {
+   "LOC": 9144,
+   "PER": 8295,
+   "ORG": 7311
+  }
+ },
+ "validacion": {
+  "textos": 2000,
+  "menciones": {
+   "PER": 757,
+   "LOC": 943,
+   "ORG": 773
+  }
+ }
+}
