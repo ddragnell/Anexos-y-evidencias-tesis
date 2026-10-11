@@ -23,6 +23,7 @@ Detalle en [`resultados/resumen_final.md`](resultados/resumen_final.md).
 
 | Carpeta | Contenido |
 |---|---|
+| `docs/` | MMatriz de revisión de literatura (Anexos A y B de la tesis) |
 | `mecanismo/` | Taxonomía de 13 etiquetas, detector regex, detector NER, fusión, heurística, enmascaramiento, métricas y línea base Presidio |
 | `proxy/` | Proxy FastAPI (`servidor.py`) y página de demostración (`demo.html`) |
 | `scripts/` | Generación del corpus sintético, conversión de MEDDOCAN, AI4Privacy y WikiANN, preparación y partición del corpus de Doccano, entrenamiento del NER, evaluación de detección y de respuestas, acuerdo entre anotadores y prueba del proxy |
