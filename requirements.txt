@@ -1,0 +1,14 @@
+# mecanismo, evaluación de detección y Presidio
+spacy>=3.8
+es-core-news-sm
+presidio-analyzer
+presidio-anonymizer
+# entrenamiento del NER (BERT)
+torch
+transformers
+accelerate
+# proxy y evaluación de respuestas
+fastapi
+uvicorn
+openai
+sentence-transformers
