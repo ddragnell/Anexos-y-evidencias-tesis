@@ -1,0 +1,46 @@
+{
+ "gpt-6-luna": {
+  "n": 60,
+  "fecha_ejecucion_utc": "2026-10-13T20:59:25+00:00",
+  "versiones_api": [
+   "gpt-6-luna"
+  ],
+  "temperatura": "predeterminada (no admite el parámetro)",
+  "embeddings": "sentence-transformers/paraphrase-multilingual-mpnet-base-v2",
+  "sim_original_vs_enmascarado": {
+   "media": 0.7601287260651588,
+   "mediana": 0.7818186283111572,
+   "desv": 0.12609677733676078,
+   "min": 0.4405430555343628
+  },
+  "sim_original_vs_original": {
+   "media": 0.888224000732104,
+   "mediana": 0.9075957834720612,
+   "desv": 0.09250887160280345,
+   "min": 0.56819087266922
+  },
+  "respuestas_con_marcadores": 48
+ },
+ "gpt-5-mini": {
+  "n": 60,
+  "fecha_ejecucion_utc": "2026-10-13T21:13:11+00:00",
+  "versiones_api": [
+   "gpt-5-mini-2025-08-07"
+  ],
+  "temperatura": "predeterminada (no admite el parámetro)",
+  "embeddings": "sentence-transformers/paraphrase-multilingual-mpnet-base-v2",
+  "sim_original_vs_enmascarado": {
+   "media": 0.6892232984304428,
+   "mediana": 0.7047877907752991,
+   "desv": 0.11966707196668579,
+   "min": 0.355144202709198
+  },
+  "sim_original_vs_original": {
+   "media": 0.8291049669186275,
+   "mediana": 0.8422955870628357,
+   "desv": 0.1266336180338539,
+   "min": 0.3364439606666565
+  },
+  "respuestas_con_marcadores": 58
+ }
+}

@@ -1,0 +1,62 @@
+{
+ "datos": "datos/sintetico/dev.jsonl",
+ "salidas": "resultados/sintetico_dev_final/salidas_hibrido.jsonl",
+ "totales": {
+  "directo": 179,
+  "un_cuasi": 29,
+  "varios_cuasi": 16,
+  "limpio": 56
+ },
+ "por_umbral": {
+  "0.4": {
+   "enmascarados": 204,
+   "directo_sin_enmascarar": 0,
+   "un_cuasi_enmascarados": 9,
+   "varios_cuasi_enmascarados": 16,
+   "limpios_enmascarados": 0,
+   "ER_di": 0.9923664122137404,
+   "ER_qi": 0.8023952095808383,
+   "fuga_residual": 0.07977991746905089
+  },
+  "0.5": {
+   "enmascarados": 204,
+   "directo_sin_enmascarar": 0,
+   "un_cuasi_enmascarados": 9,
+   "varios_cuasi_enmascarados": 16,
+   "limpios_enmascarados": 0,
+   "ER_di": 0.9923664122137404,
+   "ER_qi": 0.8023952095808383,
+   "fuga_residual": 0.07977991746905089
+  },
+  "0.6": {
+   "enmascarados": 196,
+   "directo_sin_enmascarar": 0,
+   "un_cuasi_enmascarados": 1,
+   "varios_cuasi_enmascarados": 16,
+   "limpios_enmascarados": 0,
+   "ER_di": 0.9923664122137404,
+   "ER_qi": 0.7784431137724551,
+   "fuga_residual": 0.0907840440165062
+  },
+  "0.7": {
+   "enmascarados": 196,
+   "directo_sin_enmascarar": 0,
+   "un_cuasi_enmascarados": 1,
+   "varios_cuasi_enmascarados": 16,
+   "limpios_enmascarados": 0,
+   "ER_di": 0.9923664122137404,
+   "ER_qi": 0.7784431137724551,
+   "fuga_residual": 0.0907840440165062
+  },
+  "0.8": {
+   "enmascarados": 195,
+   "directo_sin_enmascarar": 0,
+   "un_cuasi_enmascarados": 0,
+   "varios_cuasi_enmascarados": 16,
+   "limpios_enmascarados": 0,
+   "ER_di": 0.9923664122137404,
+   "ER_qi": 0.7754491017964071,
+   "fuga_residual": 0.0921595598349381
+  }
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "ner_backend": "spacy",
+ "conjuntos": [
+  "datos/sintetico/test.jsonl",
+  "datos/doccano/prueba.jsonl"
+ ],
+ "prompts": 165,
+ "carpetas_vigiladas": 2,
+ "archivos_vigilados": 37,
+ "aperturas_en_escritura_u_operaciones_de_archivo": 0,
+ "archivos_creados_o_modificados": 0,
+ "caracteres_registrados_en_logs_stdout_stderr": 0,
+ "valores_buscados": 503,
+ "valores_encontrados_en_registros": 0,
+ "solicitudes_al_servicio_simulado": 165,
+ "solicitudes_con_store_false": 165,
+ "respuestas_con_error_ia": 0,
+ "sin_persistencia": true
+}
