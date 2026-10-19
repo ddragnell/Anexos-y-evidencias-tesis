@@ -1,6 +1,7 @@
 # mecanismo, evaluación de detección y Presidio
 spacy>=3.8
 es-core-news-sm
+es-core-news-lg
 presidio-analyzer
 presidio-anonymizer
 # entrenamiento del NER (BERT)

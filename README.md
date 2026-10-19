@@ -6,16 +6,20 @@ Trabajo de grado de Andrés Saldarriaga. Este repositorio contiene el mecanismo 
 
 ## Resultados principales
 
-Prueba ciega sobre 45 prompts reales anotados en Doccano (ejecutada una sola vez):
+Prueba ciega sobre 45 prompts de erfanzar/GPT-4-Prompts anotados en Doccano (ejecutada una sola vez):
 
 | Sistema | F1 | F2 | F2 id. directos y secretos | Fuga residual | Prompts limpios enmascarados |
 |---|---|---|---|---|---|
-| **Híbrido (este trabajo)** | **0,800** | **0,837** | **0,861** | **0,098** | **0/27** |
-| Presidio (línea base) | 0,375 | 0,502 | 0,572 | 0,176 | 17/27 |
+| **Híbrido (este trabajo)** | **0,800** | **0,837** | **0,861** | 0,098 | **0/27** |
+| Presidio (línea base, es_core_news_lg) | 0,503 | 0,633 | 0,714 | **0,059** | 12/27 |
 
-- MEDDOCAN test: F2 0,947. Corpus sintético test: F2 0,961.
+- Presidio deja menos fuga en la prueba ciega porque enmascara mucho más texto (WP 0,624 frente a 0,904 del híbrido) y 12 de los 27 prompts limpios.
+- MEDDOCAN test: F2 0,947 (Presidio 0,497). Corpus sintético test, que verifica la implementación: F2 0,967 (Presidio 0,616).
 - Acuerdo entre anotadores (50 textos, segundo anotador: un compañero): kappa de Cohen por token 0,919; F1 por mención 0,835.
+- Sesgo de pre-anotación (`scripts/sesgo_preanotacion.py`): la pre-anotación coincide más con la referencia del autor (F1 0,529) que con la del segundo anotador (0,427), pero el híbrido obtiene resultados parecidos frente a las dos (0,938 y 0,933 en los 7 prompts de prueba de la muestra).
 - Proxy de extremo a extremo con el modelo final: 165/165 prompts enviados exactamente con el texto evaluado; latencia mediana 15,9 ms (p95 28,4 ms) en Colab con GPU T4.
+- Prueba de no persistencia del proxy (`scripts/prueba_no_persistencia.py`): 165 prompts sin ninguna escritura de archivos ni registros, y todas las llamadas con `store=False`.
+- Análisis de sensibilidad del umbral de la heurística en el sintético de desarrollo (`scripts/sensibilidad_umbral.py`): los umbrales 0,6 y 0,7 dan las mismas decisiones.
 
 Detalle en [`resultados/resumen_final.md`](resultados/resumen_final.md).
 
