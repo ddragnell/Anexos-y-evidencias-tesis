@@ -1,0 +1,60 @@
+{
+  "preanotacion_vs_autor": {
+    "coinciden": 27,
+    "referencia": 57,
+    "prediccion": 45,
+    "F1": 0.529
+  },
+  "preanotacion_vs_segundo": {
+    "coinciden": 22,
+    "referencia": 58,
+    "prediccion": 45,
+    "F1": 0.427
+  },
+  "no_preanotadas": {
+    "autor": {
+      "total": 29,
+      "ORG": 3,
+      "PER": 24,
+      "NET_DIGITAL": 1,
+      "LOC": 1
+    },
+    "segundo": {
+      "total": 35,
+      "ORG": 6,
+      "PER": 27,
+      "CREDENTIAL": 1,
+      "LOC": 1
+    }
+  },
+  "hibrido": {
+    "prueba": {
+      "vs_autor": {
+        "coinciden": 15,
+        "referencia": 16,
+        "prediccion": 16,
+        "F1": 0.938
+      },
+      "vs_segundo": {
+        "coinciden": 14,
+        "referencia": 14,
+        "prediccion": 16,
+        "F1": 0.933
+      }
+    },
+    "prueba+validacion": {
+      "vs_autor": {
+        "coinciden": 16,
+        "referencia": 18,
+        "prediccion": 19,
+        "F1": 0.865
+      },
+      "vs_segundo": {
+        "coinciden": 15,
+        "referencia": 15,
+        "prediccion": 19,
+        "F1": 0.882
+      }
+    }
+  }
+}
