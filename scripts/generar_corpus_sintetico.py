@@ -157,6 +157,9 @@ class Gen:
     def LOC(self):
         return self.r.choice(LOCS)
 
+    def PAIS(self):  # país fijo de una plantilla; se anota como LOC, igual que en Doccano
+        return "Colombia"
+
     def ORG(self):
         return self.r.choice(ORGS)
 
@@ -208,7 +211,7 @@ RANURA_A_ETIQUETA = {
     "ID_DOC_CC": "ID_DOC", "ID_DOC_NIT": "ID_DOC", "ID_DOC_CE": "ID_DOC", "ID_DOC_PAS": "ID_DOC",
     "FIN_ID_TARJETA": "FIN_ID", "FIN_ID_CUENTA": "FIN_ID", "DATE": "DATE", "LOC": "LOC", "ORG": "ORG",
     "CRED_PWD": "CREDENTIAL", "CRED_KEY": "CREDENTIAL", "NET_IP": "NET_DIGITAL", "NET_MAC": "NET_DIGITAL",
-    "URL": "URL", "DOC_REF": "DOC_REF",
+    "URL": "URL", "DOC_REF": "DOC_REF", "PAIS": "LOC",
 }
 
 # (escenario, plantilla). Los textos sin ranuras son prompts limpios.
@@ -263,7 +266,7 @@ PLANTILLAS = [
     ("contextual", "Prepara la agenda del comité del {DATE} con los temas de presupuesto y contratación."),
     ("contextual", "Escribe una nota interna: el portal {URL} estará en mantenimiento el fin de semana."),
     # limpios
-    ("limpio", "Explícame la diferencia entre un contrato a término fijo y uno indefinido en Colombia."),
+    ("limpio", "Explícame la diferencia entre un contrato a término fijo y uno indefinido en {PAIS}."),  # el país se anota como LOC
     ("limpio", "Escribe una función en Python que valide si una cadena es un correo electrónico."),
     ("limpio", "Resume en cinco viñetas las buenas prácticas para gestionar contraseñas en una empresa."),
     ("limpio", "¿Cómo calculo el IVA del 19% sobre una factura de $2.500.000?"),

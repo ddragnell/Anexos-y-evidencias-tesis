@@ -11,18 +11,20 @@ Solo se usan prompts sintéticos o públicos: el prompt original nunca debe
 contener datos reales (sección 5).
 
 Requiere OPENAI_API_KEY. Se evalúan dos modelos por la API, con store=False:
-- GPT-5.5 Instant, el predeterminado de ChatGPT gratuito, por su alias
-  "chat-latest", que apunta al modelo Instant vigente en ChatGPT (el script
-  registra la fecha y el identificador de versión que devuelve la API).
+- gpt-6-luna, el modelo predeterminado de ChatGPT para los planes Free y Go
+  desde el 7 de octubre de 2026 (notas de versión de ChatGPT). No tiene una
+  versión fija: el script registra la fecha y el identificador que devuelve la API.
 - gpt-5-mini, versión fija de referencia.
+(Antes se usaba el alias "chat-latest", que desde el 7 de octubre de 2026 apunta
+al modelo de los planes de pago y no al del plan gratuito.)
 Temperatura: se pide 0; si el modelo no admite el parámetro (los de
 razonamiento GPT-5 no lo admiten) se usa el valor predeterminado y se
 registra así.
 Embeddings: sentence-transformers/paraphrase-multilingual-mpnet-base-v2.
 
 Uso:
-  python scripts/evaluar_respuestas.py --salidas resultados/sintetico_test/salidas_hibrido_heuristica.jsonl \
-      --modelos chat-latest gpt-5-mini --n 60
+  python scripts/evaluar_respuestas.py --salidas resultados/sintetico_test_final/salidas_hibrido_heuristica.jsonl \
+      --modelos gpt-6-luna gpt-5-mini --n 60
 """
 import argparse
 import json
@@ -67,7 +69,7 @@ def responder(cliente, modelo, texto, intentos=4):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--salidas", required=True, help="salidas_<sistema>.jsonl de evaluar_deteccion.py")
-    ap.add_argument("--modelos", nargs="+", default=["chat-latest", "gpt-5-mini"])
+    ap.add_argument("--modelos", nargs="+", default=["gpt-6-luna", "gpt-5-mini"])
     ap.add_argument("--n", type=int, default=60)
     ap.add_argument("--embeddings", default="sentence-transformers/paraphrase-multilingual-mpnet-base-v2")
     ap.add_argument("--semilla", type=int, default=13)
