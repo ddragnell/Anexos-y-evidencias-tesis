@@ -1,6 +1,7 @@
 """Línea base: Microsoft Presidio tal como viene, configurado para español.
 
-Usa el motor spaCy con es_core_news_sm y los reconocedores predefinidos que
+Usa el motor spaCy con es_core_news_lg, el modelo más grande con reconocimiento
+de entidades que spaCy ofrece para español, y los reconocedores predefinidos que
 Presidio carga para "es". No se agregan reconocedores propios (cédula, NIT,
 credenciales...), porque la línea base mide lo que Presidio cubre sin
 adaptación. Sus tipos se traducen a la taxonomía para poder compararlo.
@@ -21,7 +22,7 @@ MAPEO_PRESIDIO = {
 class DetectorPresidio:
     nombre = "presidio"
 
-    def __init__(self, modelo_spacy: str = "es_core_news_sm", umbral: float = 0.0):
+    def __init__(self, modelo_spacy: str = "es_core_news_lg", umbral: float = 0.0):
         logging.getLogger("tldextract").setLevel(logging.CRITICAL)
         logging.getLogger("presidio-analyzer").setLevel(logging.ERROR)
         from presidio_analyzer import AnalyzerEngine, RecognizerRegistry
